@@ -14,9 +14,9 @@ contract KaseiCoinCrowdsale is Crowdsale, MintedCrowdsale { // UPDATE THE CONTRA
     constructor(
         // YOUR CODE HERE!
         uint rate,
-        payable address wallet,
+        address payable wallet,
         KaseiCoin token
-    ) public Crowdsale(rate, wallet, token) {
+    ) Crowdsale(rate, wallet, token) public {
         // constructor can stay empty
     }
 }
@@ -29,7 +29,7 @@ contract KaseiCoinCrowdsaleDeployer {
 
     // Create an `address public` variable called `kasei_crowdsale_address`.
     // YOUR CODE HERE!
-    address public kasei_crowdsale_address
+    address public kasei_crowdsale_address;
 
     // Add the constructor.
     constructor(
@@ -41,7 +41,7 @@ contract KaseiCoinCrowdsaleDeployer {
     ) public {
         // Create a new instance of the KaseiCoin contract.
         // YOUR CODE HERE!
-        KaseiCoin token = new KaseiCoin(name, symbol, 0)
+        KaseiCoin token = new KaseiCoin(name, symbol, 0);
 
         // Assign the token contract’s address to the `kasei_token_address` variable.
         // YOUR CODE HERE!
@@ -58,7 +58,7 @@ contract KaseiCoinCrowdsaleDeployer {
 
         // Set the `KaseiCoinCrowdsale` contract as a minter
         // YOUR CODE HERE!
-        token.minter(kasei_crowdsale_address);
+        token.addMinter(kasei_crowdsale_address);
         
         // Have the `KaseiCoinCrowdsaleDeployer` renounce its minter role.
         // YOUR CODE HERE!
